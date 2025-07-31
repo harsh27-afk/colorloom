@@ -2,22 +2,22 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import ProjectCardd from "./project-card";
+import ProjectCard from "./project-card";
 
-export function ProjectGrid({ project }) {
-  const route = useRouter();
+export function ProjectGrid({ projects }) {
+  const router = useRouter();
 
-  const handleEditProject = (id) => {
-    route.push(`/edit/${id}`);
+  const handleEditProject = (projectId) => {
+    router.push(`/editor/${projectId}`);
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-4 gap6">
-      {project.map((item) => (
-        <ProjectCardd
-          key={item.id}
-          proj={item}
-          editClick={() => handleEditProject(item._id)}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {projects.map((project) => (
+        <ProjectCard
+          key={project._id}
+          project={project}
+          onEdit={() => handleEditProject(project._id)}
         />
       ))}
     </div>
