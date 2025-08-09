@@ -5,6 +5,9 @@ import { useParams } from "next/navigation";
 import { useConvexQuery } from "@/hooks/use-convex-query";
 import { api } from "@/convex/_generated/api";
 import { Loader2, Monitor } from "lucide-react";
+import { EditorTopBar } from "./_components/editor-topbar";
+import { EditorSidebar } from "./_components/editor-sidebar";
+import CanvasEditor from "./_components/canvas";
 import { CanvasContext } from "@/context/context";
 import { RingLoader } from "react-spinners";
 
@@ -95,10 +98,21 @@ export default function EditorPage() {
             </div>
           )}
 
-        
+          {/* Top Bar */}
+          <EditorTopBar project={project} />
+
+          {/* Main Editor Layout */}
+          <div className="flex flex-1 overflow-hidden">
+            {/* Sidebar */}
+            <EditorSidebar project={project} />
+
+            {/* Canvas Area */}
+            <div className="flex-1 bg-slate-800">
+              <CanvasEditor project={project} activeTool={activeTool} />
+            </div>
           </div>
         </div>
-      
+      </div>
     </CanvasContext.Provider>
   );
 }
